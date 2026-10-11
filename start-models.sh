@@ -12,6 +12,7 @@ fi
 
 # 2. Ensure target model directories exist
 mkdir -p /workspace/ComfyUI/models/diffusion_models \
+         /workspace/ComfyUI/models/unet \
          /workspace/ComfyUI/models/text_encoders \
          /workspace/ComfyUI/models/vae \
          /workspace/ComfyUI/models/loras
@@ -41,11 +42,11 @@ def get_hf_model(repo_id, filename, target_dir):
     except Exception as e:
         print(f'Error downloading {filename}: {e}')
 
-get_hf_model('black-forest-labs/FLUX.2-klein-9b-fp8', 'flux-2-klein-9b-fp8.safetensors', '/workspace/ComfyUI/models/diffusion_models')
-get_hf_model('Comfy-Org/vae-text-encorder-for-flux-klein-9b', 'split_files/text_encoders/qwen_3_8b_fp8mixed.safetensors', '/workspace/ComfyUI/models/text_encoders')
-get_hf_model('Comfy-Org/flux2-dev', 'split_files/vae/flux2-vae.safetensors', '/workspace/ComfyUI/models/vae')
-get_hf_model('dx8152/Flux2-Klein-9B-Consistency', 'Klein-consistency.safetensors', '/workspace/ComfyUI/models/loras')
-get_hf_model('jhsu/flux2_retro_comic_style', 'FLUX.2-klein-9B_Retro_comic_PULPKHOR_STYLE.safetensors', '/workspace/ComfyUI/models/loras')
+get_hf_model('Comfy-Org/MiniMax-H3', 'diffusion_models/minimax_h3_ref2va_pruned_int8_convrot.safetensors', '/workspace/ComfyUI/models/unet')
+get_hf_model('Comfy-Org/MiniMax-H3', 'text_encoders/qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors', '/workspace/ComfyUI/models/text_encoders')
+get_hf_model('Comfy-Org/MiniMax-H3', 'vae/minimax_h3_video_vae_int8_convrot.safetensors', '/workspace/ComfyUI/models/vae')
+get_hf_model('Comfy-Org/MiniMax-H3', 'vae/minimax_h3_audio_vae_fp32.safetensors', '/workspace/ComfyUI/models/vae')
+get_hf_model('lightx2v/Minimax-h3-Turbo', 'minimax_h3_ref2v_turbo_4step_v0.1_comfyui_bf16.safetensors', '/workspace/ComfyUI/models/loras')
 "
 
 echo "Model downloads complete!"
