@@ -16,7 +16,7 @@ WORKDIR ${COMFYUI_DIR}/custom_nodes
 RUN git clone https://github.com/rgthree/rgthree-comfy.git && cd rgthree-comfy && git checkout 2c5342a && cd .. \
     && git clone https://github.com/kijai/ComfyUI-KJNodes.git && cd ComfyUI-KJNodes && git checkout 5710537 && cd .. \
     && git clone https://github.com/chrisgoringe/cg-use-everywhere.git && cd cg-use-everywhere && git checkout 50ae9f8 && cd .. \
-    && git clone https://github.com/slahiri/ComfyUI-Workflow-Models-Downloader.git && cd ComfyUI-Workflow-Models-Downloader && git checkout c3ef4db && cd ..
+    && git clone https://github.com/slahiri/ComfyUI-Workflow-Models-Downloader.git && cd ComfyUI-Workflow-Models-Downloader && git checkout c3ef4db && cd .. \
     && git clone https://github.com/xmarre/ComfyUI-Spectrum-MiniMax-H3.git \
     && git clone https://github.com/lihaoyun6/ComfyUI-H3VAE_TRT.git
 
@@ -26,7 +26,7 @@ RUN pip install --no-cache-dir sageattention==1.0.6 huggingface_hub hf_transfer 
     && pip install --no-cache-dir -r ComfyUI-KJNodes/requirements.txt || true \
     && pip install --no-cache-dir -r cg-use-everywhere/requirements.txt || true \
     && pip install --no-cache-dir -r ComfyUI-Workflow-Models-Downloader/requirements.txt || true \
-    && pip install --no-cache-dir -r ComfyUI-H3VAE_TRT/requirements.txt || true \    
+    && pip install --no-cache-dir -r ComfyUI-H3VAE_TRT/requirements.txt || true \
     && rm -rf /root/.cache
 
 # 5. Setup your Model Download Script
