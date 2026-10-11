@@ -26,7 +26,7 @@ jobs:
         id: vars
         run: |
           USERNAME=$(echo "${{ secrets.DOCKERHUB_USERNAME }}" | tr '[:upper:]' '[:lower:]')
-          echo "tag=${USERNAME}/bfgf-school-comfy:latest" >> $GITHUB_OUTPUT
+          echo "tag=${USERNAME}/vast-comfyui-h3:latest" >> $GITHUB_OUTPUT
 
       - name: Build and push image
         uses: docker/build-push-action@v6
