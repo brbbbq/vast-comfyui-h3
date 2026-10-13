@@ -1,5 +1,5 @@
 # 1. Inherit Vast's highly optimized image (Includes Syncthing, Jupyter, SSH, and ComfyUI)
-FROM vastai/comfy:v0.35.0-cuda-13.2-py312
+FROM vastai/comfy:v0.39.0-cuda-12.9-py312
 
 # 2. Switch to root to install Node.js and aria2
 USER root
@@ -18,15 +18,18 @@ RUN git clone https://github.com/rgthree/rgthree-comfy.git && cd rgthree-comfy &
     && git clone https://github.com/chrisgoringe/cg-use-everywhere.git && cd cg-use-everywhere && git checkout 50ae9f8 && cd .. \
     && git clone https://github.com/slahiri/ComfyUI-Workflow-Models-Downloader.git && cd ComfyUI-Workflow-Models-Downloader && git checkout c3ef4db && cd .. \
     && git clone https://github.com/xmarre/ComfyUI-Spectrum-MiniMax-H3.git \
-    && git clone https://github.com/lihaoyun6/ComfyUI-H3VAE_TRT.git
+    && git clone https://github.com/lihaoyun6/ComfyUI-H3VAE_TRT.git \
+    && git clone https://github.com/veda-sparse/Veda-on-ComfyUI.git \
+    && git clone https://github.com/xmarre/ComfyUI-Spectrum-MiniMax-H3.git
 
 # 4. Install Node Dependencies (--no-cache-dir prevents gigabytes of bloat)
-RUN pip install --no-cache-dir sageattention==1.0.6 huggingface_hub hf_transfer \
+RUN pip install --no-cache-dir sageattention==2.2.0 huggingface_hub hf_transfer \
     && pip install --no-cache-dir -r rgthree-comfy/requirements.txt || true \
     && pip install --no-cache-dir -r ComfyUI-KJNodes/requirements.txt || true \
     && pip install --no-cache-dir -r cg-use-everywhere/requirements.txt || true \
     && pip install --no-cache-dir -r ComfyUI-Workflow-Models-Downloader/requirements.txt || true \
     && pip install --no-cache-dir -r ComfyUI-H3VAE_TRT/requirements.txt || true \
+    && pip install --no-cache-dir -r Veda-on-ComfyUI/requirements.txt || true \
     && rm -rf /root/.cache
 
 # 5. Setup your Model Download Script
