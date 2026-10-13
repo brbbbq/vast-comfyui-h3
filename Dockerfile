@@ -1,5 +1,5 @@
 # 1. Inherit Vast's highly optimized image (Includes Syncthing, Jupyter, SSH, and ComfyUI)
-FROM vastai/comfy:v0.39.0-cuda-12.9-py312
+FROM vastai/comfy:v0.37.0-cuda-13.2-py312
 
 # 2. Switch to root to install Node.js and aria2
 USER root
@@ -23,7 +23,8 @@ RUN git clone https://github.com/rgthree/rgthree-comfy.git && cd rgthree-comfy &
     && git clone https://github.com/kosinkadink/ComfyUI-VideoHelperSuite
 
 # 4. Install Node Dependencies (--no-cache-dir prevents gigabytes of bloat)
-RUN pip install --no-cache-dir sageattention==2.2.0 huggingface_hub hf_transfer \
+RUN pip install --no-cache-dir huggingface_hub hf_transfer \
+    opencv-python-headless imageio imageio-ffmpeg tensorrt onnxruntime-gpu \
     && pip install --no-cache-dir -r rgthree-comfy/requirements.txt || true \
     && pip install --no-cache-dir -r ComfyUI-KJNodes/requirements.txt || true \
     && pip install --no-cache-dir -r cg-use-everywhere/requirements.txt || true \
