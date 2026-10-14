@@ -3,6 +3,9 @@ name: Build and Push Docker Image
 on:
   push:
     branches: [ "main", "master" ]
+    paths-ignore:
+      - 'start-models.sh'   # Skips the build when you update models
+      - 'README.md'         # Skips the build if you update docs
   workflow_dispatch:
 
 jobs:

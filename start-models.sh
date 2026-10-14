@@ -58,9 +58,9 @@ get_hf_model('t8star/MiniMax-H3-Acc-8Step-comfy', 'MiniMax-H3-Ref2VA-Acc-8Step_c
 get_hf_model('Veda-Sparse/Minimax-H3-T2VA-Veda-8NFE-600Step-Preview', 'minimax_h3_t2va_veda_8nfe_600step_preview_fp8.safetensors', '/workspace/ComfyUI/models/veda')
 
 # --- MINIMAX H3 TENSORRT VAE (ONNX Base Files) ---
-get_hf_model('lihaoyun6/MiniMax-H3-VAE-ONNX', 'minimax_h3_vae_decoder.onnx', '/workspace/ComfyUI/models/vae')
-get_hf_model('lihaoyun6/MiniMax-H3-VAE-ONNX', 'minimax_h3_vae_decoder.onnx.data', '/workspace/ComfyUI/models/vae')
-get_hf_model('lihaoyun6/MiniMax-H3-VAE-ONNX', 'minimax_h3_vae_encoder.onnx', '/workspace/ComfyUI/models/vae')
+# get_hf_model('lihaoyun6/MiniMax-H3-VAE-ONNX', 'minimax_h3_vae_decoder.onnx', '/workspace/ComfyUI/models/vae')
+# get_hf_model('lihaoyun6/MiniMax-H3-VAE-ONNX', 'minimax_h3_vae_decoder.onnx.data', '/workspace/ComfyUI/models/vae')
+# get_hf_model('lihaoyun6/MiniMax-H3-VAE-ONNX', 'minimax_h3_vae_encoder.onnx', '/workspace/ComfyUI/models/vae')
 "
 
 echo "Model downloads complete!"

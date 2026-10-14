@@ -20,11 +20,12 @@ RUN git clone https://github.com/rgthree/rgthree-comfy.git && cd rgthree-comfy &
     && git clone https://github.com/xmarre/ComfyUI-Spectrum-MiniMax-H3.git \
     && git clone https://github.com/lihaoyun6/ComfyUI-H3VAE_TRT.git \
     && git clone https://github.com/veda-sparse/Veda-on-ComfyUI.git \
-    && git clone https://github.com/kosinkadink/ComfyUI-VideoHelperSuite
+    && git clone https://github.com/kosinkadink/ComfyUI-VideoHelperSuite \
+    && git clone https://github.com/Zironic/H3-Optimizations
 
 # 4. Install Node Dependencies (--no-cache-dir prevents gigabytes of bloat)
 RUN pip install --no-cache-dir huggingface_hub hf_transfer \
-    opencv-python-headless imageio imageio-ffmpeg tensorrt onnxruntime-gpu \
+    opencv-python-headless imageio imageio-ffmpeg tensorrt-cu12 onnxruntime-gpu \
     && pip install --no-cache-dir -r rgthree-comfy/requirements.txt || true \
     && pip install --no-cache-dir -r ComfyUI-KJNodes/requirements.txt || true \
     && pip install --no-cache-dir -r cg-use-everywhere/requirements.txt || true \
@@ -34,9 +35,6 @@ RUN pip install --no-cache-dir huggingface_hub hf_transfer \
     && pip install --no-cache-dir -r ComfyUI-VideoHelperSuite/requirements.txt || true \
     && rm -rf /root/.cache
 
-# 5. Setup your Model Download Script
-COPY start-models.sh /workspace/start-models.sh
-RUN chmod +x /workspace/start-models.sh
 
 # Return to workspace
 WORKDIR /workspace
