@@ -33,6 +33,7 @@ RUN pip install --no-cache-dir huggingface_hub hf_transfer \
     && pip install --no-cache-dir -r ComfyUI-H3VAE_TRT/requirements.txt || true \
     && pip install --no-cache-dir -r Veda-on-ComfyUI/requirements.txt || true \
     && pip install --no-cache-dir -r ComfyUI-VideoHelperSuite/requirements.txt || true \
+    && pip install --no-cache-dir -r ${COMFYUI_DIR}/manager_requirements.txt || true \
     && rm -rf /root/.cache
 
 

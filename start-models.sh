@@ -45,14 +45,14 @@ def get_hf_model(repo_id, filename, target_dir):
 
 # --- MINIMAX H3 MODELS ---
 get_hf_model('Comfy-Org/MiniMax-H3', 'diffusion_models/minimax_h3_ref2va_pruned_int8_convrot.safetensors', '/workspace/ComfyUI/models/unet')
-get_hf_model('smhfacct/Minimax-H3-fl2va-ref2va-hybrid-models', 'minimax_h3_hybrid_fl2va_ref2va_b25-49-int8.safetensors', '/workspace/ComfyUI/models/unet')
+# get_hf_model('smhfacct/Minimax-H3-fl2va-ref2va-hybrid-models', 'minimax_h3_hybrid_fl2va_ref2va_b25-49-int8.safetensors', '/workspace/ComfyUI/models/unet')
 get_hf_model('Comfy-Org/MiniMax-H3', 'text_encoders/qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors', '/workspace/ComfyUI/models/text_encoders')
 get_hf_model('Comfy-Org/MiniMax-H3', 'vae/minimax_h3_video_vae_int8_convrot.safetensors', '/workspace/ComfyUI/models/vae')
 get_hf_model('Comfy-Org/MiniMax-H3', 'vae/minimax_h3_audio_vae_fp32.safetensors', '/workspace/ComfyUI/models/vae')
 
 # --- TURBO LORAS ---
 get_hf_model('lightx2v/Minimax-h3-Turbo', 'minimax_h3_ref2v_turbo_4step_v0.1_comfyui_bf16.safetensors', '/workspace/ComfyUI/models/loras')
-get_hf_model('t8star/MiniMax-H3-Acc-8Step-comfy', 'MiniMax-H3-Ref2VA-Acc-8Step_comfyui_pdd-T8.safetensors', '/workspace/ComfyUI/models/loras')
+# get_hf_model('t8star/MiniMax-H3-Acc-8Step-comfy', 'MiniMax-H3-Ref2VA-Acc-8Step_comfyui_pdd-T8.safetensors', '/workspace/ComfyUI/models/loras')
 
 # --- VEDA PREDICTOR ---
 get_hf_model('Veda-Sparse/Minimax-H3-T2VA-Veda-8NFE-600Step-Preview', 'minimax_h3_t2va_veda_8nfe_600step_preview_fp8.safetensors', '/workspace/ComfyUI/models/veda')
@@ -66,6 +66,9 @@ get_hf_model('Veda-Sparse/Minimax-H3-T2VA-Veda-8NFE-600Step-Preview', 'minimax_h
 echo "Model downloads complete!"
 
 # 4. Revive ComfyUI
+echo "Enabling ComfyUI Manager in Vast config..."
+grep -q "--enable-manager" /etc/supervisor/conf.d/*.conf || sed -i 's/main.py/main.py --enable-manager/g' /etc/supervisor/conf.d/*.conf
+
 echo "Restarting ComfyUI service..."
 supervisorctl update
 supervisorctl restart comfyui || supervisorctl start comfyui
