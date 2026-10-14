@@ -67,9 +67,9 @@ echo "Model downloads complete!"
 
 # 4. Revive ComfyUI
 echo "Enabling ComfyUI Manager in Vast config..."
-grep -q -e "--enable-manager" /etc/supervisor/conf.d/comfyui.conf || sed -i '/^command=/ s/$/ --enable-manager/' /etc/supervisor/conf.d/comfyui.conf
+# Safely inject the flag right after main.py instead of at the end of the bash string
+grep -q -e "--enable-manager" /etc/supervisor/conf.d/comfyui.conf || sed -i 's/main.py/main.py --enable-manager/g' /etc/supervisor/conf.d/comfyui.conf
 
 echo "Restarting ComfyUI service..."
 supervisorctl update
 supervisorctl restart comfyui || supervisorctl start comfyui
-echo "=== All systems online ==="
