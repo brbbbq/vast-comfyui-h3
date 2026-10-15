@@ -4,8 +4,9 @@ on:
   push:
     branches: [ "main", "master" ]
     paths-ignore:
-      - 'start-models.sh'   # Skips the build when you update models
-      - 'README.md'         # Skips the build if you update docs
+      - 'provision-minimax-h3.sh'
+      - 'start-models.sh'
+      - 'README.md'
   workflow_dispatch:
 
 jobs:

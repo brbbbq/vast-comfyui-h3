@@ -65,11 +65,6 @@ get_hf_model('Veda-Sparse/Minimax-H3-T2VA-Veda-8NFE-600Step-Preview', 'minimax_h
 
 echo "Model downloads complete!"
 
-# 4. Revive ComfyUI
-echo "Enabling ComfyUI Manager in Vast config..."
-# Safely inject the flag right after main.py instead of at the end of the bash string
-grep -q -e "--enable-manager" /etc/supervisor/conf.d/comfyui.conf || sed -i 's/main.py/main.py --enable-manager/g' /etc/supervisor/conf.d/comfyui.conf
-
 echo "Restarting ComfyUI service..."
 supervisorctl update
 supervisorctl restart comfyui || supervisorctl start comfyui
