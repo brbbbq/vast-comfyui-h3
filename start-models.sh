@@ -18,7 +18,8 @@ mkdir -p /workspace/ComfyUI/models/diffusion_models \
          /workspace/ComfyUI/models/loras \
          /workspace/ComfyUI/models/veda
 
-# 3. Run Model Downloads
+# 3. Enable HF Transfer & Run Model Downloads
+export HF_HUB_ENABLE_HF_TRANSFER=1
 echo "--> Downloading Hugging Face models..."
 
 python3 -c "
@@ -61,3 +62,7 @@ get_hf_model('Veda-Sparse/Minimax-H3-T2VA-Veda-8NFE-600Step-Preview', 'minimax_h
 "
 
 echo "Model downloads complete!"
+
+echo "Restarting ComfyUI service..."
+supervisorctl update
+supervisorctl restart comfyui || supervisorctl start comfyui
