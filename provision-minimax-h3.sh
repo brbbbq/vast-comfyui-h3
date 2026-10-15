@@ -9,6 +9,7 @@ NODES=(
     "https://github.com/lihaoyun6/ComfyUI-H3VAE_TRT"
     "https://github.com/veda-sparse/Veda-on-ComfyUI"
     "https://github.com/Zironic/H3-Optimizations"
+    "https://github.com/xmarre/Comfyui_Minimax_h3_latent_Upscaler-Plus"
 )
 
 # 1. Update ComfyUI Core & missing PIP requirements

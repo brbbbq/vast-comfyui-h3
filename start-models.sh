@@ -16,8 +16,8 @@ mkdir -p /workspace/ComfyUI/models/diffusion_models \
          /workspace/ComfyUI/models/text_encoders \
          /workspace/ComfyUI/models/vae \
          /workspace/ComfyUI/models/loras \
-         /workspace/ComfyUI/models/veda
-
+         /workspace/ComfyUI/models/veda \
+         /workspace/ComfyUI/models/latent_upscale_models/
 # 3. Enable HF Transfer & Run Model Downloads
 export HF_HUB_ENABLE_HF_TRANSFER=1
 echo "--> Downloading Hugging Face models..."
@@ -59,7 +59,12 @@ get_hf_model('Veda-Sparse/Minimax-H3-T2VA-Veda-8NFE-600Step-Preview', 'minimax_h
 # get_hf_model('lihaoyun6/MiniMax-H3-VAE-ONNX', 'minimax_h3_vae_decoder.onnx', '/workspace/ComfyUI/models/vae')
 # get_hf_model('lihaoyun6/MiniMax-H3-VAE-ONNX', 'minimax_h3_vae_decoder.onnx.data', '/workspace/ComfyUI/models/vae')
 # get_hf_model('lihaoyun6/MiniMax-H3-VAE-ONNX', 'minimax_h3_vae_encoder.onnx', '/workspace/ComfyUI/models/vae')
+
+# --- MINIMAX H3 LATENT UPSCALER ---
+# get_hf_model('LBH-123-AI/Minimax_h3_latent_Upscaler', 'minimax_h3_latent_upscaler_3d_conv_v1/minimax_h3_latent_upscaler_3d_conv_v1_bf16.safetensors', '/workspace/ComfyUI/models/latent_upscale_models/')
 "
+
+https://huggingface.co/LBH-123-AI/Minimax_h3_latent_Upscaler/resolve/main/minimax_h3_latent_upscaler_3d_conv_v1/minimax_h3_latent_upscaler_3d_conv_v1_bf16.safetensors?download=true
 
 echo "Model downloads complete!"
 
