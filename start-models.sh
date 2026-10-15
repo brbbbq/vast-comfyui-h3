@@ -56,5 +56,6 @@ get_hf_model('LBH-123-AI/Minimax_h3_latent_Upscaler', 'minimax_h3_latent_upscale
 
 echo "Model downloads complete!"
 
-# Restart ComfyUI softly so it registers the new models without breaking the container
+# Give the container 15 seconds to ensure supervisor is fully booted, then restart ComfyUI
+sleep 15
 supervisorctl restart comfyui || echo "ComfyUI not running yet, skipping restart"
