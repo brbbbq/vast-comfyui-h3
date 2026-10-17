@@ -12,13 +12,7 @@ NODES=(
     "https://github.com/xmarre/Comfyui_Minimax_h3_latent_Upscaler-Plus"
 )
 
-# 1. Faster, safer ComfyUI Core Update (Required for Veda)
-echo "Ensuring ComfyUI core is up to date..."
-cd $COMFYUI_DIR
-git pull origin master
-$VENV_PIP install --no-cache-dir -r requirements.txt
-
-# 2. Download and Update Custom Nodes
+# Download and Update Custom Nodes
 mkdir -p "${COMFYUI_DIR}/custom_nodes"
 for repo in "${NODES[@]}"; do
     dir="${repo##*/}"

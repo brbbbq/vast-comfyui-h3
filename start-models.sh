@@ -1,6 +1,15 @@
 #!/bin/bash
 echo "=== Starting Background Model Downloads ==="
 
+# 1. If main.py isn't in /workspace/ComfyUI, safely merge core ComfyUI into it
+if [ ! -f "/workspace/ComfyUI/main.py" ] || ! grep -q "0.38\|0.39" /workspace/ComfyUI/comfy_extras/xxx.py 2>/dev/null; then
+    echo "Updating ComfyUI core for Veda compatibility..."
+    git clone https://github.com/comfyanonymous/ComfyUI.git /tmp/ComfyUI_core
+    cp -rn /tmp/ComfyUI_core/* /workspace/ComfyUI/
+    cp -n /tmp/ComfyUI_core/.* /workspace/ComfyUI/ 2>/dev/null || true
+    rm -rf /tmp/ComfyUI_core
+fi
+
 # Ensure target model directories exist
 mkdir -p /workspace/ComfyUI/models/diffusion_models \
          /workspace/ComfyUI/models/unet \
