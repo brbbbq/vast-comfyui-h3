@@ -1,15 +1,6 @@
 #!/bin/bash
 echo "=== Starting Background Model Downloads ==="
 
-# 1. If main.py isn't in /workspace/ComfyUI, safely merge core ComfyUI into it
-if [ ! -f "/workspace/ComfyUI/main.py" ] || ! grep -q "0.38\|0.39" /workspace/ComfyUI/comfy_extras/xxx.py 2>/dev/null; then
-    echo "Updating ComfyUI core for Veda compatibility..."
-    git clone https://github.com/comfyanonymous/ComfyUI.git /tmp/ComfyUI_core
-    cp -rn /tmp/ComfyUI_core/* /workspace/ComfyUI/
-    cp -n /tmp/ComfyUI_core/.* /workspace/ComfyUI/ 2>/dev/null || true
-    rm -rf /tmp/ComfyUI_core
-fi
-
 # Ensure target model directories exist
 mkdir -p /workspace/ComfyUI/models/diffusion_models \
          /workspace/ComfyUI/models/unet \
@@ -65,6 +56,5 @@ get_hf_model('LBH-123-AI/Minimax_h3_latent_Upscaler', 'minimax_h3_latent_upscale
 
 echo "Model downloads complete!"
 
-# Give the container 15 seconds to ensure supervisor is fully booted, then restart ComfyUI
-sleep 15
-supervisorctl restart comfyui || echo "ComfyUI not running yet, skipping restart"
+# Restart ComfyUI so the new models show up in the UI automatically
+supervisorctl restart comfyui || true
