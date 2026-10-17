@@ -21,7 +21,7 @@ RUN git clone https://github.com/rgthree/rgthree-comfy.git && cd rgthree-comfy &
 
 # 4. Install Node Dependencies (--no-cache-dir prevents gigabytes of bloat)
 RUN /venv/main/bin/pip install --no-cache-dir huggingface_hub hf_transfer \
-    opencv-python-headless imageio imageio-ffmpeg tensorrt-cu12 onnxruntime-gpu \
+    opencv-python-headless imageio imageio-ffmpeg tensorrt tensorrt-cu13 onnxruntime-gpu \
     && /venv/main/bin/pip install --no-cache-dir -r rgthree-comfy/requirements.txt || true \
     && /venv/main/bin/pip install --no-cache-dir -r ComfyUI-KJNodes/requirements.txt || true \
     && /venv/main/bin/pip install --no-cache-dir -r cg-use-everywhere/requirements.txt || true \

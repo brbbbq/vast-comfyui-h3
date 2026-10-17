@@ -12,17 +12,11 @@ NODES=(
     "https://github.com/xmarre/Comfyui_Minimax_h3_latent_Upscaler-Plus"
 )
 
-# 1. Update ComfyUI Core & missing PIP requirements
-if [ ! -f "${COMFYUI_DIR}/main.py" ] || ! grep -q "0.38\|0.39" "${COMFYUI_DIR}/comfy_extras/xxx.py" 2>/dev/null; then
-    echo "Updating ComfyUI core for Veda compatibility..."
-    git clone https://github.com/comfyanonymous/ComfyUI.git /tmp/ComfyUI_core
-    cp -rn /tmp/ComfyUI_core/* ${COMFYUI_DIR}/
-    cp -n /tmp/ComfyUI_core/.* ${COMFYUI_DIR}/ 2>/dev/null || true
-    rm -rf /tmp/ComfyUI_core
-    
-    # CRITICAL FIX: Update the frontend and core pip dependencies
-    $VENV_PIP install --no-cache-dir -r ${COMFYUI_DIR}/requirements.txt
-fi
+# 1. Faster, safer ComfyUI Core Update (Required for Veda)
+echo "Ensuring ComfyUI core is up to date..."
+cd $COMFYUI_DIR
+git pull origin master
+$VENV_PIP install --no-cache-dir -r requirements.txt
 
 # 2. Download and Update Custom Nodes
 mkdir -p "${COMFYUI_DIR}/custom_nodes"
@@ -41,11 +35,12 @@ for repo in "${NODES[@]}"; do
     
     if [[ -e $requirements ]]; then
         printf "Installing requirements for %s...\n" "${dir}"
+        # This will now run instantly because heavy packages are in the Docker image
         $VENV_PIP install --no-cache-dir -r "${requirements}" || true
     fi
 done
 
-# Ensure permissions are correct if AI-Dock runs this as root
+# Ensure permissions are correct
 chown -R workspace:workspace "${COMFYUI_DIR}/custom_nodes" 2>/dev/null || true
 
 echo "=== Provisioning Complete! ==="
