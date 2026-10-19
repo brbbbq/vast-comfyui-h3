@@ -8,9 +8,13 @@ RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
     nodejs aria2 \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# 3. Install Heavy Node Dependencies 
-# (Doing this here caches the 3.8GB TensorRT library so the provisioning script is lightning fast)
+# 3. Install Heavy Node Dependencies
 RUN /venv/main/bin/pip install --no-cache-dir huggingface_hub hf_transfer \
     opencv-python-headless imageio imageio-ffmpeg tensorrt tensorrt-cu13 onnxruntime-gpu
+
+# 4. Update Vast's seed copy of ComfyUI + bake custom nodes
+COPY provision-minimax-h3.sh bake-image.sh /tmp/
+ARG CACHEBUST=0
+RUN bash /tmp/bake-image.sh && rm -f /tmp/bake-image.sh /tmp/provision-minimax-h3.sh
 
 WORKDIR /workspace
