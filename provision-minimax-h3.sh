@@ -17,7 +17,7 @@ NODES=(
     # "https://github.com/xmarre/Comfyui_Minimax_h3_latent_Upscaler-Plus"
     "https://github.com/LBH-123-AI/Comfyui_Minimax_h3_latent_Upscaler"
     "https://github.com/chanon/comfyui-obvpm-timeline"
-    "https://github.com/chanon/comfyui-obvpm-timeline"
+    "https://github.com/chanon/comfyui-obvpm"
 )
 
 # 1. Safely Install / Update ComfyUI Core
