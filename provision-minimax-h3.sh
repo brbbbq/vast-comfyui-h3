@@ -38,11 +38,12 @@ if [ ! -f "${COMFYUI_DIR}/main.py" ]; then
     fi
 fi
 
-# 2. Pull any commits newer than the image build
+# 2. Enforce ComfyUI pinned version
 if [ -d "${COMFYUI_DIR}/.git" ]; then
-    echo "Updating ComfyUI..."
-    # TWEAK C: Force reset to remote to avoid fast-forward conflicts
-    (cd "${COMFYUI_DIR}" && git fetch --all && git reset --hard origin/master) \
+    echo "Enforcing ComfyUI version v0.38.2..."
+    # Check out the tag; if we don't have it, shallow fetch it and reset
+    (cd "${COMFYUI_DIR}" && git checkout v0.38.2 2>/dev/null || \
+    (git fetch --depth 1 origin tag v0.38.2 && git reset --hard FETCH_HEAD)) \
         || echo "WARN: git update failed, continuing with existing version"
 fi
 
@@ -59,8 +60,8 @@ for repo in "${NODES[@]}"; do
 
     if [[ -d $path ]]; then
         printf "Updating node: %s...\n" "${dir}"
-        # TWEAK C: Force reset to remote to avoid fast-forward conflicts
-        ( cd "$path" && git fetch --all && git reset --hard origin/HEAD ) || echo "WARN: pull failed for ${dir}"
+        # Keep the fetch shallow! Only grab the absolute latest commit.
+        ( cd "$path" && git fetch --depth 1 origin HEAD && git reset --hard FETCH_HEAD ) || echo "WARN: pull failed for ${dir}"
     else
         printf "Downloading node: %s...\n" "${dir}"
         git clone --depth 1 --recursive --shallow-submodules "${repo}" "${path}"
